@@ -1,9 +1,6 @@
 import React, { useEffect } from 'react'
 import axios from 'axios'
 import config from './config.json'
-import React, { useEffect } from 'react'
-import axios from 'axios'
-import config from './config.json'
 
 function App() {
     const [persons, setPersons] = React.useState([])
