@@ -1,17 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import axios from 'axios'
 import config from './config.json'
 
 function App() {
     const [persons, setPersons] = React.useState([])
-    useEffect(() => {
-        axios
-            .get(`${config.api_base_url}/person`)
-            .then((response) => {
-                setPersons(response.data)
-            })
-            .catch((error) => console.log(error))
-    }, [])
 
     const [details, setDetails] = React.useState({ name: '', surname: '' })
 
@@ -29,9 +21,19 @@ function App() {
                 `${config.api_base_url}/person`,
                 details
             )
-        setPersons(response.data)
+            setPersons(response.data)
         } catch (error) {
             console.log('error  ', error)
+        }
+    }
+
+    const handleGet = async () => {
+        try {
+            const response = await axios.get(`${config.api_base_url}/person`)
+            console.log('response   ', response)
+            setPersons(response.data)
+        } catch (error) {
+            console.log(error)
         }
     }
 
@@ -67,7 +69,16 @@ function App() {
                     placeholder='surname'
                 />
             </div>
-            <button style={{marginLeft:'10px'}} onClick={handleSubmit}>submit</button>
+            <button
+                style={{ marginLeft: '10px' }}
+                onClick={handleSubmit}>
+                submit
+            </button>
+            <button
+                style={{ marginLeft: '10px' }}
+                onClick={handleGet}>
+                get
+            </button>
         </div>
     )
 }
