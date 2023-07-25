@@ -26,7 +26,7 @@ function App() {
     const handleSubmit = async () => {
         try {
             const response = await axios.post(
-                `${config.api_base_url}/person/`,
+                `${config.api_base_url}/person`,
                 details
             )
         setPersons(response.data)
